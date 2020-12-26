@@ -8,8 +8,10 @@ private:
 	QVBoxLayout *vbox;
 	void edited();
 	void clear();
-//public slots:
+
 	void returnPressed();
+	void keyPressEvent(QKeyEvent*);
+	int selected=1;
 public:
 	Window();
 	~Window();
