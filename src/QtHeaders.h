@@ -10,3 +10,5 @@
 #include <QLineEdit>
 #include <QTimer>
 #include <QKeyEvent>
+#include <QIcon>
+#include <QPixmap>

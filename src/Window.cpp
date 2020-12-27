@@ -96,12 +96,12 @@ Window::Window() {
 
 	connect(edit, &QLineEdit::textChanged, this, &Window::edited);
 	connect(edit, &QLineEdit::returnPressed, this, &Window::returnPressed);
-
+	
 	this->setWindowFlags(Qt::CustomizeWindowHint);
 	this->setFixedWidth(512);
 	this->resize(512,64);
 	this->setWindowTitle("Launcher");
-	
+	edit->setStyleSheet("font-size:28px");
 	QRect geom = QApplication::desktop()->screenGeometry();
 	int x = (geom.width()-this->width())/2;
 	int y = (geom.height()-this->height())/2 - 64;
