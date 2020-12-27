@@ -40,7 +40,7 @@ DISTNAME      = Entry1.0.0
 DISTDIR = /home/joshua/Sync/Launcher/build/.tmp/Entry1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
+LIBS          = $(SUBLIBS) -lqalculate /usr/lib/libQt5Widgets.so /usr/lib/libQt5Gui.so /usr/lib/libQt5Core.so -lGL -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -55,11 +55,13 @@ OBJECTS_DIR   = ./
 SOURCES       = ../src/ApplicationManager.cpp \
 		../src/Entry.cpp \
 		../src/Item.cpp \
+		../src/MathManager.cpp \
 		../src/Util.cpp \
 		../src/Window.cpp 
 OBJECTS       = ApplicationManager.o \
 		Entry.o \
 		Item.o \
+		MathManager.o \
 		Util.o \
 		Window.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -278,6 +280,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
 		/usr/lib/qt/mkspecs/features/resolve_config.prf \
 		/usr/lib/qt/mkspecs/features/default_post.prf \
+		/usr/lib/qt/mkspecs/features/link_pkgconfig.prf \
 		/usr/lib/qt/mkspecs/features/warn_on.prf \
 		/usr/lib/qt/mkspecs/features/qt.prf \
 		/usr/lib/qt/mkspecs/features/resources_functions.prf \
@@ -296,11 +299,27 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../src/Entry.h \
 		../src/Item.h \
 		../src/Log.h \
+		../src/MathManager.h \
 		../src/QtHeaders.h \
 		../src/Util.h \
-		../src/Window.h ../src/ApplicationManager.cpp \
+		../src/Window.h \
+		../include/BuiltinFunctions.h \
+		../include/Calculator.h \
+		../include/DataSet.h \
+		../include/ExpressionItem.h \
+		../include/Function.h \
+		../include/includes.h \
+		../include/MathStructure.h \
+		../include/Number.h \
+		../include/Prefix.h \
+		../include/qalculate.h \
+		../include/QalculateDateTime.h \
+		../include/Unit.h \
+		../include/util.h \
+		../include/Variable.h ../src/ApplicationManager.cpp \
 		../src/Entry.cpp \
 		../src/Item.cpp \
+		../src/MathManager.cpp \
 		../src/Util.cpp \
 		../src/Window.cpp
 QMAKE_TARGET  = Entry
@@ -530,6 +549,7 @@ Makefile: make.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
 		/usr/lib/qt/mkspecs/features/resolve_config.prf \
 		/usr/lib/qt/mkspecs/features/default_post.prf \
+		/usr/lib/qt/mkspecs/features/link_pkgconfig.prf \
 		/usr/lib/qt/mkspecs/features/warn_on.prf \
 		/usr/lib/qt/mkspecs/features/qt.prf \
 		/usr/lib/qt/mkspecs/features/resources_functions.prf \
@@ -762,6 +782,7 @@ Makefile: make.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/
 /usr/lib/qt/mkspecs/features/default_pre.prf:
 /usr/lib/qt/mkspecs/features/resolve_config.prf:
 /usr/lib/qt/mkspecs/features/default_post.prf:
+/usr/lib/qt/mkspecs/features/link_pkgconfig.prf:
 /usr/lib/qt/mkspecs/features/warn_on.prf:
 /usr/lib/qt/mkspecs/features/qt.prf:
 /usr/lib/qt/mkspecs/features/resources_functions.prf:
@@ -792,8 +813,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/ApplicationManager.h ../src/Entry.h ../src/Item.h ../src/Log.h ../src/QtHeaders.h ../src/Util.h ../src/Window.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/ApplicationManager.cpp ../src/Entry.cpp ../src/Item.cpp ../src/Util.cpp ../src/Window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/ApplicationManager.h ../src/Entry.h ../src/Item.h ../src/Log.h ../src/MathManager.h ../src/QtHeaders.h ../src/Util.h ../src/Window.h ../include/BuiltinFunctions.h ../include/Calculator.h ../include/DataSet.h ../include/ExpressionItem.h ../include/Function.h ../include/includes.h ../include/MathStructure.h ../include/Number.h ../include/Prefix.h ../include/qalculate.h ../include/QalculateDateTime.h ../include/Unit.h ../include/util.h ../include/Variable.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/ApplicationManager.cpp ../src/Entry.cpp ../src/Item.cpp ../src/MathManager.cpp ../src/Util.cpp ../src/Window.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -861,6 +882,13 @@ Item.o: ../src/Item.cpp ../src/Item.h \
 		../src/QtHeaders.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Item.o ../src/Item.cpp
 
+MathManager.o: ../src/MathManager.cpp ../include/Calculator.h \
+		../src/MathManager.h \
+		../src/QtHeaders.h \
+		../src/Item.h \
+		../src/Util.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MathManager.o ../src/MathManager.cpp
+
 Util.o: ../src/Util.cpp ../src/Util.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Util.o ../src/Util.cpp
 
@@ -868,7 +896,9 @@ Window.o: ../src/Window.cpp ../src/QtHeaders.h \
 		../src/Window.h \
 		../src/Entry.h \
 		../src/ApplicationManager.h \
-		../src/Item.h
+		../src/Item.h \
+		../src/MathManager.h \
+		../include/Calculator.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Window.o ../src/Window.cpp
 
 ####### Install

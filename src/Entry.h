@@ -1,3 +1,5 @@
+#pragma once
+
 #include "QtHeaders.h"
 #include "Window.h"
 

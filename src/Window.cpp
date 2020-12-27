@@ -4,6 +4,7 @@
 #include "Window.h"
 #include "Entry.h"
 #include "ApplicationManager.h"
+#include "MathManager.h"
 #include "Item.h"
 
 
@@ -52,6 +53,9 @@ void Window::edited() {
 	for (Item *i: ApplicationManager::loadItems(edit->text().toStdString())) {
 		toSort.push_back(i);
 	}
+	for (Item *i: MathManager::loadItems(edit->text().toStdString())) {
+		toSort.push_back(i);
+	}
 
 	// todo sort
 	sort(toSort.begin(),toSort.end(),compItem);
@@ -96,7 +100,8 @@ Window::Window() {
 
 	connect(edit, &QLineEdit::textChanged, this, &Window::edited);
 	connect(edit, &QLineEdit::returnPressed, this, &Window::returnPressed);
-	
+	MathManager::init();	
+
 	this->setWindowFlags(Qt::CustomizeWindowHint);
 	this->setFixedWidth(512);
 	this->resize(512,64);

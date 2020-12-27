@@ -2,7 +2,6 @@
 
 #include <vector>
 #include <string>
-#include <memory>
 #include "QtHeaders.h"
 #include "Item.h"
 

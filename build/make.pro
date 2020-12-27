@@ -4,4 +4,7 @@ QT += core gui widgets
 
 SOURCES += ../src/*.cpp
 HEADERS += ../src/*.h
-CONFIG += c++17 -lfilesystem
+HEADERS += ../include/*.h
+
+CONFIG += c++17 -lfilesystem link_pkgconfig
+PKGCONFIG += libqalculate

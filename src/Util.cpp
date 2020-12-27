@@ -54,7 +54,9 @@ int levenschtein(std::string a, std::string b) {
 		}
 	}
 	if (startsWith(b,a)) {
-		dp[a.size()-1][b.size()-1]/=4;
+		float percent = (float)a.length()/b.length();
+		percent*=0.5f;
+		dp[a.size()-1][b.size()-1]*=percent;
 	}
 	return dp[a.size()-1][b.size()-1];
 }
