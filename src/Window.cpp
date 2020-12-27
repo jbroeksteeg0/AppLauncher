@@ -15,6 +15,13 @@ bool compItem(Item *a, Item *b) {
 	return a->priority<b->priority;
 }
 
+void Window::updateSize(int val) {
+	if (prevUpdate==val) {
+		this->resize(sizeHint());
+		this->adjustSize();
+	}
+}
+
 void Window::clear() {
 	while (vbox->count()>1) {
 		QLayoutItem *item = vbox->takeAt(vbox->count()-1);
@@ -46,12 +53,14 @@ void Window::keyPressEvent(QKeyEvent *e) {
 	}
 }
 void Window::edited() {
-	clear();
-	
 	std::vector<Item*> toSort;
 
 	for (Item *i: ApplicationManager::loadItems(edit->text().toStdString())) {
 		toSort.push_back(i);
+	}
+
+	if (MathManager::loadItems(edit->text().toStdString()).size()) {
+		toSort.clear();
 	}
 	for (Item *i: MathManager::loadItems(edit->text().toStdString())) {
 		toSort.push_back(i);
@@ -60,6 +69,7 @@ void Window::edited() {
 	// todo sort
 	sort(toSort.begin(),toSort.end(),compItem);
 
+	clear();
 	for (Item *i: toSort) {
 		if (vbox->count()<6 && i->priority<=3) {
 			vbox->addWidget(i);	
@@ -74,8 +84,10 @@ void Window::edited() {
 		top->setFrameShape(QFrame::StyledPanel);
 		top->setFrameShadow(QFrame::Raised);
 	}
-	this->resize(sizeHint());
-	this->adjustSize();
+	
+	QTimer::singleShot((prevUpdate==0?0:40), [&]{
+		updateSize(++prevUpdate);
+	});
 }
 
 void Window::returnPressed() {

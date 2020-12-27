@@ -882,10 +882,10 @@ Item.o: ../src/Item.cpp ../src/Item.h \
 		../src/QtHeaders.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Item.o ../src/Item.cpp
 
-MathManager.o: ../src/MathManager.cpp ../include/Calculator.h \
-		../src/MathManager.h \
+MathManager.o: ../src/MathManager.cpp ../src/MathManager.h \
 		../src/QtHeaders.h \
 		../src/Item.h \
+		../include/Calculator.h \
 		../src/Util.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MathManager.o ../src/MathManager.cpp
 

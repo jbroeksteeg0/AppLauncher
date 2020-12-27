@@ -13,7 +13,7 @@ void MathManager::init() {
 std::vector<Item*> MathManager::loadItems(std::string query) {
 	if (startsWith(query, "c ") && query != "c ") {
 		std::string expr = query.substr(2,query.length()-2);
-		Item *curr = new Item(calculator->calculateAndPrint(expr, 200),"","calculator",false,-1);
+		Item *curr = new Item(calculator->calculateAndPrint(expr, 200),"","kcalc",false,-1);
 		return {curr};
 	}
 	return {};

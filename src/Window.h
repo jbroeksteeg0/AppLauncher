@@ -6,12 +6,13 @@ class Window: public QWidget {
 private:
 	QLineEdit *edit;
 	QVBoxLayout *vbox;
-	void edited();
 	void clear();
+	void updateSize(int);
 
 	void returnPressed();
+	void edited();
 	void keyPressEvent(QKeyEvent*);
-	int selected=1;
+	int selected=1, prevUpdate=0;
 public:
 	Window();
 	~Window();
