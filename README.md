@@ -1,4 +1,14 @@
 # App Launcher
-Basically just DMenu but written in Qt. Doesn't do much at this point, but will probably have more use in the future.
+Basically just DMenu but written in Qt.
 
-Needs libqalculate to run (i think)
+## Requirements
+- Linux only
+- Needs libqalculate
+- Only tested on KDE
+
+## Features
+- Launch Applications
+- Evaluate math with prefix "c "
+- Run shell commands with prefix "x "
+- Get date
+- Shutdown, reboot or lock screen
