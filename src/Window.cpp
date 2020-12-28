@@ -5,6 +5,7 @@
 #include "Entry.h"
 #include "ApplicationManager.h"
 #include "MathManager.h"
+#include "SystemManager.h"
 #include "Item.h"
 
 
@@ -58,11 +59,10 @@ void Window::edited() {
 	for (Item *i: ApplicationManager::loadItems(edit->text().toStdString())) {
 		toSort.push_back(i);
 	}
-
-	if (MathManager::loadItems(edit->text().toStdString()).size()) {
-		toSort.clear();
-	}
 	for (Item *i: MathManager::loadItems(edit->text().toStdString())) {
+		toSort.push_back(i);
+	}
+	for (Item *i: SystemManager::loadItems(edit->text().toStdString())) {
 		toSort.push_back(i);
 	}
 
@@ -85,7 +85,7 @@ void Window::edited() {
 		top->setFrameShadow(QFrame::Raised);
 	}
 	
-	QTimer::singleShot((prevUpdate==0?0:40), [&]{
+	QTimer::singleShot((prevUpdate==0?0:80), [&]{
 		updateSize(++prevUpdate);
 	});
 }

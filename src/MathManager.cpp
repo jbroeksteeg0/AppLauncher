@@ -6,7 +6,7 @@ void MathManager::init() {
 	calculator->loadExchangeRates();
 	calculator->loadGlobalDefinitions();
 	calculator->loadLocalDefinitions();
-	calculator->setPrecision(8);
+	calculator->setPrecision(14);
 	calculator->useIntervalArithmetic(false);
 }
 

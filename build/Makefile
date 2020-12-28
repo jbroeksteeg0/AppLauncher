@@ -56,12 +56,14 @@ SOURCES       = ../src/ApplicationManager.cpp \
 		../src/Entry.cpp \
 		../src/Item.cpp \
 		../src/MathManager.cpp \
+		../src/SystemManager.cpp \
 		../src/Util.cpp \
 		../src/Window.cpp 
 OBJECTS       = ApplicationManager.o \
 		Entry.o \
 		Item.o \
 		MathManager.o \
+		SystemManager.o \
 		Util.o \
 		Window.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -301,6 +303,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../src/Log.h \
 		../src/MathManager.h \
 		../src/QtHeaders.h \
+		../src/SystemManager.h \
 		../src/Util.h \
 		../src/Window.h \
 		../include/BuiltinFunctions.h \
@@ -320,6 +323,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		../src/Entry.cpp \
 		../src/Item.cpp \
 		../src/MathManager.cpp \
+		../src/SystemManager.cpp \
 		../src/Util.cpp \
 		../src/Window.cpp
 QMAKE_TARGET  = Entry
@@ -813,8 +817,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/ApplicationManager.h ../src/Entry.h ../src/Item.h ../src/Log.h ../src/MathManager.h ../src/QtHeaders.h ../src/Util.h ../src/Window.h ../include/BuiltinFunctions.h ../include/Calculator.h ../include/DataSet.h ../include/ExpressionItem.h ../include/Function.h ../include/includes.h ../include/MathStructure.h ../include/Number.h ../include/Prefix.h ../include/qalculate.h ../include/QalculateDateTime.h ../include/Unit.h ../include/util.h ../include/Variable.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/ApplicationManager.cpp ../src/Entry.cpp ../src/Item.cpp ../src/MathManager.cpp ../src/Util.cpp ../src/Window.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/ApplicationManager.h ../src/Entry.h ../src/Item.h ../src/Log.h ../src/MathManager.h ../src/QtHeaders.h ../src/SystemManager.h ../src/Util.h ../src/Window.h ../include/BuiltinFunctions.h ../include/Calculator.h ../include/DataSet.h ../include/ExpressionItem.h ../include/Function.h ../include/includes.h ../include/MathStructure.h ../include/Number.h ../include/Prefix.h ../include/qalculate.h ../include/QalculateDateTime.h ../include/Unit.h ../include/util.h ../include/Variable.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/ApplicationManager.cpp ../src/Entry.cpp ../src/Item.cpp ../src/MathManager.cpp ../src/SystemManager.cpp ../src/Util.cpp ../src/Window.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -889,6 +893,12 @@ MathManager.o: ../src/MathManager.cpp ../src/MathManager.h \
 		../src/Util.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MathManager.o ../src/MathManager.cpp
 
+SystemManager.o: ../src/SystemManager.cpp ../src/SystemManager.h \
+		../src/QtHeaders.h \
+		../src/Item.h \
+		../src/Util.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SystemManager.o ../src/SystemManager.cpp
+
 Util.o: ../src/Util.cpp ../src/Util.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Util.o ../src/Util.cpp
 
@@ -898,7 +908,8 @@ Window.o: ../src/Window.cpp ../src/QtHeaders.h \
 		../src/ApplicationManager.h \
 		../src/Item.h \
 		../src/MathManager.h \
-		../include/Calculator.h
+		../include/Calculator.h \
+		../src/SystemManager.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Window.o ../src/Window.cpp
 
 ####### Install
